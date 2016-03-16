@@ -12,21 +12,34 @@ import React, {
   Image,
   TouchableHighlight,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 
-var data = [
-  {  
-     "id":1,
-     "image":"http://40.media.tumblr.com/a74a1f85c34aa6dda78feb73d6ed05e1/tumblr_o44r7kes821qk9hrqo1_1280.jpg",
-     "id":2,
-     "image":"http://36.media.tumblr.com/84390a033afee2bcc7ea71fc1c295a0e/tumblr_o1cuq7FM7D1qk9hrqo1_1280.jpg"
-  }
-]
+var data = 
+  [
+    {"id":0,"image":"http://36.media.tumblr.com/5772c213215b93d28b3e7d623ea235f5/tumblr_o2kvw6xK5B1qk9hrqo1_500.jpg"
+    },
+    {"id":1,"image":"http://41.media.tumblr.com/8e98347075f892dd68089b484bdfb24b/tumblr_o18cw9IQ9o1qk9hrqo1_500.jpg"
+    },
+    {"id":2,"image":"http://41.media.tumblr.com/03697595f058ea4eb290ea740981408f/tumblr_o40g74a1vw1qk9hrqo1_500.jpg"
+    },
+    {"id":3,"image":"http://40.media.tumblr.com/6a99e8752622d46ce52a2ebab2d423ca/tumblr_o3z3kl6Fbq1qk9hrqo1_500.jpg"
+    },
+    {"id":4,"image":"http://40.media.tumblr.com/1292f03f7617d2b6fb2fd959468f59ac/tumblr_o3wxp2GSmH1qk9hrqo1_500.jpg"
+    },
+    {"id":5,"image":"http://41.media.tumblr.com/1aa38783ac6f4075b945c4f1f846b67d/tumblr_o3soxlFgbd1qk9hrqo1_500.jpg"
+    }
+  ]
+
+var {height, width} = Dimensions.get('window');
+console.log(height,width);
 
 class approveMobile extends Component {
 
   constructor(props){
     super(props);
+
+    this.state = data[0]  
   }
 
   render() {
@@ -39,8 +52,9 @@ class approveMobile extends Component {
         </View>
         <View style={styles.imageBox}>
           <Image
-            source={{uri: 'http://40.media.tumblr.com/a74a1f85c34aa6dda78feb73d6ed05e1/tumblr_o44r7kes821qk9hrqo1_1280.jpg'}}
-            style={{width: 400, height: 400}} />
+            resizeMode={'contain'}
+            source={{uri: this.state.image }}
+            style={{width: width, height: 500}} />
         </View>
         <View style={styles.toolbar}>
           <TouchableOpacity
@@ -62,8 +76,15 @@ class approveMobile extends Component {
     );
   }
 
-  onApprovePressed(){
+  onApprovePressed(e){
     console.log('approved!')
+    console.log(this.state)
+    var new_id = this.state.id + 1;
+    console.log(new_id)
+    if (new_id < data.length) {
+      this.setState(data[new_id])
+    }
+  
   }
 
   onRejectPressed(){
@@ -100,7 +121,8 @@ const styles = StyleSheet.create({
   imageBox: {
     alignSelf: 'stretch',
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   toolbar: {
     alignSelf: 'center',
