@@ -45,31 +45,48 @@ class approveMobile extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.topbar}>
-          <Text style={styles.welcome}>
-            Header
-          </Text>
+        
+        <View style={styles.topbarWrapper}>
+          <View style={styles.topbar}>
+            <TouchableOpacity
+              onPress={this.onHamburgerPressed.bind(this)}
+              style={styles.hamburger}>
+              <Image
+                resizeMode={'contain'}
+                style={styles.hamburgerImg}
+                source={require('image!hamburger')} /> 
+            </TouchableOpacity>
+            <Image
+              resizeMode={'contain'}
+              style={styles.topbarLogo}
+              source={require('image!topbar_logo')} />
+              <View style={styles.topbarSpacer} /> 
+          </View>
         </View>
+
         <View style={styles.imageBox}>
           <Image
             resizeMode={'contain'}
             source={{uri: this.state.image }}
             style={{width: width, height: 500}} />
         </View>
+
         <View style={styles.toolbar}>
           <TouchableOpacity
             style={styles.actionButton}
             onPress={this.onRejectPressed.bind(this)}>
             <Image
-              style={styles.actionButton}
-              source={require('image!icons_x')} /> 
+              resizeMode={'contain'}
+              style={styles.actionButtonImg}
+              source={require('image!Reject_btn')} /> 
           </TouchableOpacity>
           <TouchableOpacity
             onPress={this.onApprovePressed.bind(this)}
             style={styles.actionButton}>
             <Image
-              style={styles.actionButton}
-              source={require('image!icons_check')} /> 
+              resizeMode={'contain'}
+              style={styles.actionButtonImg}
+              source={require('image!Approve_btn')} /> 
           </TouchableOpacity>
         </View>
       </View>
@@ -91,6 +108,10 @@ class approveMobile extends Component {
     console.log('Rejected!')
   }
 
+  onHamburgerPressed(){
+    console.log('Hamburger!')
+  }
+
 }
 
 
@@ -99,13 +120,38 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    paddingTop: 30,
+  },
+  topbarWrapper: {
+    alignSelf: 'stretch',
+    backgroundColor: '#03a9f4',
+    height: 70,
   },
   topbar: {
-    alignSelf: 'stretch',
-    justifyContent: 'center', 
-    backgroundColor: '#03a9f4',
-    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center', 
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 8,
+    left: 0,
+    right: 0,
+    // borderWidth: 1,
+  },
+  topbarLogo: {
+    // borderWidth: 1,
+    flex: .80,
+  },
+  topbarSpacer: {
+    // borderWidth: 1,
+    flex: .10,
+  },
+  hamburger: {
+    // borderWidth: 1,
+    alignSelf: 'center',
+    flex: .10,
+    marginLeft: 10,
+  },
+  hamburgerImg: {
+    // borderWidth: 1,
   },
   welcome: {
     fontSize: 20,
@@ -122,16 +168,32 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    // borderColor: 'red',
+    // borderWidth: 1,
   },
   toolbar: {
     alignSelf: 'center',
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    // borderColor: 'green',
+    // borderWidth: 1,
+    paddingBottom: 10,
+    paddingTop: 10,
+    width: width,
+    flex: .12,
   },
   actionButton: {
-
+    // borderColor: 'blue',
+    // borderWidth: 1,
+    alignItems: 'center',
   },
-  test : {
+  actionButtonImg: {
+    // borderColor: 'red',
+    // borderWidth: 1,
+  },
+  test: {
     borderColor: 'red',
     borderWidth: 1,
   }
